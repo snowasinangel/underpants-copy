@@ -46,6 +46,18 @@ _.identity = function(value){
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeOf = function(value) {
+if (value === null) {
+    return 'null'
+} else if (Array.isArray(value)) {
+    return 'array'
+} else {
+
+return typeof value
+}
+
+
+}
 
 
 /** _.first
@@ -66,7 +78,28 @@ _.identity = function(value){
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
+_.first = function (array, number) {
+    
+     if (!Array.isArray(array)) {
+        return []
+    }
 
+     if (typeof number !== 'number') {
+        return array[0]
+    }
+
+    if (number <= 0) {
+        return []
+    }
+    
+    if (number === 1) {
+        return array[0]
+    }
+   
+
+
+   return array.slice(0, number)
+}
 
 
 /** _.last
@@ -87,7 +120,28 @@ _.identity = function(value){
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function (array, number) {
+   
+    
+    if (!Array.isArray(array)) {
+        return []
+    }
 
+if (number > array.length) {
+    return array
+}
+    
+if (number <= 0) {
+    return []
+}
+    if (!array.includes(number)) {
+        return array[array.length - 1]
+    }
+   
+   return array.slice(0, number)
+
+
+}
 
 /** _.indexOf
 * Arguments:
