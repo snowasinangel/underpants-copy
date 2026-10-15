@@ -127,18 +127,24 @@ _.last = function (array, number) {
         return []
     }
 
-if (number > array.length) {
-    return array
-}
-    
-if (number <= 0) {
-    return []
-}
-    if (!array.includes(number)) {
+    if (typeof number !== 'number') {
         return array[array.length - 1]
     }
+
+    if (number <= 0) {
+    return []
+    }
+
+    if (number > array.length) {   
+    return array.slice()
+    }
+    
+
+    if (number > array.length) {
+        return array.slice()
+    }
    
-   return array.slice(0, number)
+   return array.slice(-number)
 
 
 }
@@ -159,7 +165,22 @@ if (number <= 0) {
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function (array, value) {
+    
+    for (let i = 0; i < array.length; i++) {
+        
+        
+        if (array[i] === value) {
+            return i
+        }
 
+        else if (!array.includes(value)) {
+            return -1
+        }
+       
+    }
+ 
+}
 
 
 /** _.contains
@@ -176,6 +197,16 @@ if (number <= 0) {
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
+
+_.contains = function (array, value) {
+    if (array.includes(value)) {
+        return true
+    }
+
+    if(!array.includes(value)) {
+        return false
+    }
+}
 
 
 /** _.each
@@ -194,6 +225,21 @@ if (number <= 0) {
 *      -> should log "a" "b" "c" to the console
 */
 
+_.each = function (collection, callback) {
+    
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            callback(collection[i], i, collection)
+        }
+    } else {
+        for (let key in collection) {
+            if (Object.prototype.hasOwnProperty.call(collection, key))
+                callback(collection[key], key, collection)
+        }
+    }
+   
+    }
+
 
 
 /** _.unique
@@ -206,7 +252,11 @@ if (number <= 0) {
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */                                             
 
-
+_.unique = function (array) {
+    return array.filter(function (item, index) {
+        return array.indexOf(item) === index
+    })
+}
 
 
 /** _.filter
@@ -225,7 +275,13 @@ if (number <= 0) {
 *   use _.each in your implementation
 */
 
-
+_.filter = function (array, callback) {
+    for (let i = 0; i < array.length; i++) {
+        return callback (function (element, index, array) {
+            
+        })
+    }
+}
 
 /** _.reject
 * Arguments:
